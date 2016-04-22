@@ -1,15 +1,19 @@
-﻿open System
+﻿namespace Fazo
+
+open System
 open Microsoft.Owin.Hosting
 open Startup
 
-[<EntryPoint>]
-let main _ =
-    let baseAddress = "http://*:9000"
-    use app = WebApp.Start<Startup>(baseAddress)
+module Program =
 
-    Console.WriteLine("Listening at {0}", baseAddress)
-    Console.WriteLine("Press any key to stop")
+    [<EntryPoint>]
+    let main _ =
+        let rootUrl = App.getRootUrl
+        use app = WebApp.Start<Startup>(rootUrl)
 
-    Console.ReadLine() |> ignore
+        Console.WriteLine("Listening at {0}", rootUrl)
+        Console.WriteLine("Press any key to stop")
 
-    0
+        Console.ReadLine() |> ignore
+
+        0
